@@ -1,6 +1,7 @@
 const btnSubmit = document.querySelector(".btn-submit");
 const game = document.querySelector(".game");
 const firendNameEl = document.querySelector("#name-of-friend");
+const welcomeMessage = document.querySelector("#Welcome-text");
 const input = document.querySelector(".input");
 let btns = document.querySelectorAll(".btn");
 const qustions = document.querySelector(".qustions");
@@ -43,6 +44,12 @@ function insertQus(index = 0, qus = "", comment = "", el) {
   </div>`;
   } else {
     htmlToBeInserted = `<h1 id="Welcome-text2">Your score is ${score}</h1>`;
+    const passingScore = questions1.length / 2;
+    if (score >= passingScore) {
+      welcomeMessage.textContent = `Wow! ${firendName}`;
+    } else {
+      welcomeMessage.textContent = `Oops! ${firendName}`;
+    }
   }
   el.insertAdjacentHTML("beforeend", htmlToBeInserted);
 }
@@ -54,7 +61,8 @@ btnSubmit.addEventListener("click", function (e) {
   e.preventDefault();
   firendName = firendNameEl.value;
   if (firendName) {
-    console.log(firendName);
+    welcomeMessage.textContent = `Welcome ${firendName} Let's play a quiz`;
+    // console.log(firendName);
     game.classList.remove("hidden");
     input.classList.add("hidden");
     haveLogind = true;
@@ -72,7 +80,7 @@ btnsForm.forEach((btn) =>
 // ADDING QUSTIONS
 //////////////////////////////////////////////////////////////
 function checkAns(prevAns) {
-  console.log(`checking ans ${prevAns}`);
+  // console.log(`checking ans ${prevAns}`);
   if (prevAns === 1) score++;
   else score--;
 }
